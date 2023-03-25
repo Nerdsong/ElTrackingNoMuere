@@ -17,7 +17,7 @@ class GeneradorCartasTecnicos{
 
     imprimirCartasTecnicos(){
         let i = 0;
-
+        document.querySelector("#contenido").innerHTML = "";
         for(i=0; i < this.cartasTecnicosGeneradas.length;i++){
             document.querySelector("#contenido").innerHTML += `
             <div class="row row-cols-3" id="${this.cartasTecnicosGeneradas[i].legajoTecnico}"> 
