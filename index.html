@@ -12,18 +12,17 @@
     <link href="estilos.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div id="data_entry">
-        <textarea id="datos_de_los_tecnicos"> Datos de los técnicos</textarea>
-        <textarea id="datos_de_los_servicios" styles="width: 200px"> Datos de los servicios</textarea>
-        <button id="boton_leer" > Leer</button>
-
-    </div>
-
+    <button id="ir-arriba" style="z-index: 1;">Ir arriba</button>
 
     <div id="contenido" class="container text-center">
 
 
     </div>
+    <div id="data_entry" class="fixed-bottom text-center" style="z-index: 0;">
+        <textarea id="drop_dom_element_1" class="dropzone"> Arrastrar archivo Xls de los técnicos aquí</textarea>
+        <textarea id="drop_dom_element_2" class="dropzone" > Arrastrar archivo dc_export aquí</textarea>
+    </div>
+    <script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.19.2/package/dist/xlsx.full.min.js"></script>
     <script type = "module" src="appPruebas.js"></script>
 </body>
 </html>

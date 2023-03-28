@@ -8,6 +8,7 @@ class Servicio{
     #severidad = "";
     #scheduleStart = "";
     #requestedBy = ""; 
+    #status = "";
     
     getLegajoServicio(){
         return this.#legajoServicio;
@@ -79,6 +80,14 @@ class Servicio{
 
     setRequestedBy(fechaHora){
         this.#requestedBy = fechaHora;
+    }
+
+    getStatus(){
+        return this.#status;
+    }
+
+    setStatus(status){
+        this.#status = status;
     }
 };
 

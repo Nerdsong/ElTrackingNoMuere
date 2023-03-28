@@ -16,6 +16,7 @@ class GeneradorDeServicios{
             this.serviciosGenerados[i].setSeveridad(matrizDatos[i][3]);
             this.serviciosGenerados[i].setScheduleStart(matrizDatos[i][7]);
             this.serviciosGenerados[i].setRequestedBy(matrizDatos[i][13]);
+            this.serviciosGenerados[i].setStatus(matrizDatos[i][2]);
         }
     }
 }

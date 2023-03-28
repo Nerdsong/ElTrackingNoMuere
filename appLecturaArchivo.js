@@ -6,7 +6,7 @@ datosTecnicosCSV =
 `nombre;Legajo;Skill;horario;disponible
 Anderson Vargas;CO101F52;SLM;7:00 A 14:00;disponible
 Jonatan Castro;CO101G05;SLM;8:00 A 17:00;no disponible
-Roger Viera;CO101G01;SLM;8:00 A 17:00;no disponible
+Roger Viera;CO101G01;SLM;8:00 A 17:00;no disponibles
 Pablo Paredes;CO101G03;SLM;10:00 A 19:00;disponible
 Yuder Hernandez;CO101G54;SLM;7:00 A 14:00;disponible
 Diego Barbosa;CO101G48;SLM;7:00 A 14:00;disponible

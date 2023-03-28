@@ -6,16 +6,89 @@ import { GeneradorCartasServicios } from "./GeneradorCartaServicio.js";
 import { Servicio } from "./Servicio.js";
 import { DatosLectura } from "./appLecturaArchivo.js";
 
-let boton_lectura = document.getElementById("boton_leer");
-class Botones{
 
-    leer (element){
-        element.addEventListener('click', () => aplicacionEjecutable());
-    }
+const drop_dom_element_1 = document.getElementById("drop_dom_element_1");
+const drop_dom_element_2 = document.getElementById("drop_dom_element_2");
+let datosCSV_1 = "";
+let datosCSV_2 = "";
+
+// Este es el manejador de eventos que se activa cuando se suelta un archivo en el área de "drop" 1
+async function handleDropAsync_1(e) {
+  e.stopPropagation();
+  e.preventDefault();
+  
+  e.target.classList.add("drop")
+
+  const f = e.dataTransfer.files[0]; // Se obtiene el archivo que se ha soltado
+  const data = await f.arrayBuffer(); // Se convierte el archivo en un ArrayBuffer
+  const workbook = XLSX.read(data); // Se lee el archivo de Excel con la biblioteca XLSX
+  
+  // Convertir la primera hoja de cálculo en formato CSV y guardarla en la variable datosCSV_1
+  const sheetName = workbook.SheetNames[0];
+  const worksheet = workbook.Sheets[sheetName];
+  const csv = XLSX.utils.sheet_to_csv(worksheet);
+  datosCSV_1 = csv;
+  
+  console.log("Datos CSV 1:", datosCSV_1);
 }
 
-const BOTON = new Botones()
-BOTON.leer(boton_lectura);
+// Este es el manejador de eventos que se activa cuando se suelta un archivo en el área de "drop" 2
+async function handleDropAsync_2(e) {
+  e.stopPropagation();
+  e.preventDefault();
+
+  e.target.classList.add("drop")
+  
+  const f = e.dataTransfer.files[0]; // Se obtiene el archivo que se ha soltado
+  const data = await f.arrayBuffer(); // Se convierte el archivo en un ArrayBuffer
+  const workbook = XLSX.read(data); // Se lee el archivo de Excel con la biblioteca XLSX
+  
+  // Convertir la primera hoja de cálculo en formato CSV y guardarla en la variable datosCSV_2
+  const sheetName = workbook.SheetNames[0];
+  const worksheet = workbook.Sheets[sheetName];
+  const csv = XLSX.utils.sheet_to_csv(worksheet);
+  datosCSV_2 = csv;
+  
+  console.log("Datos CSV 2:", datosCSV_2);
+
+  aplicacionEjecutable();
+}
+
+// Estos son los manejadores de eventos que se activan cuando se arrastra un archivo sobre las áreas de "drop"
+function handleDragEnter(e) {
+  e.stopPropagation();
+  e.preventDefault();
+  e.target.classList.add("dragover");
+}
+
+function handleDragOver(e) {
+  e.stopPropagation();
+  e.preventDefault();
+}
+
+function handleDragLeave(e) {
+  e.stopPropagation();
+  e.preventDefault();
+  e.target.classList.remove("dragover");
+}
+
+function resetBox(){
+    datosCSV_2 = "";
+    drop_dom_element_2.classList.remove("drop");
+    drop_dom_element_2.classList.remove("dragover");
+}
+
+// Aquí se registran los manejadores de eventos que se activan cuando se suelta un archivo en las áreas de "drop"
+drop_dom_element_1.addEventListener("drop", handleDropAsync_1, false);
+drop_dom_element_1.addEventListener("dragenter", handleDragEnter, false);
+drop_dom_element_1.addEventListener("dragleave", handleDragLeave, false);
+
+drop_dom_element_2.addEventListener("drop", handleDropAsync_2, false);
+drop_dom_element_2.addEventListener("dragenter", handleDragEnter, false);
+drop_dom_element_2.addEventListener("dragleave", handleDragLeave, false);
+
+
+
 
 
 function aplicacionEjecutable(){
@@ -25,8 +98,8 @@ function aplicacionEjecutable(){
     let generadorCartasT = new GeneradorCartasTecnicos();
     let generadorCartasS = new GeneradorCartasServicios()
 
-    datosLectura.setDatosCSV(document.querySelector("#datos_de_los_servicios").value);
-    datosLectura.setDatosTecnicosCSV(document.querySelector("#datos_de_los_tecnicos").value);
+    datosLectura.setDatosCSV(datosCSV_2);
+    datosLectura.setDatosTecnicosCSV(datosCSV_1);
     datosLectura.convertirDatos()
     generadorTecnicos.leerYGeneradTecnicos(datosLectura.datosTecnicos);
     generadorServicios.leerYGenerarServicios(datosLectura.datos);
@@ -55,6 +128,24 @@ function aplicacionEjecutable(){
         imprimirServiciostécnico(generadorTecnicos.tecnicosGenerados[p]);
     }
 
+    resetBox();
+
 }
+
+document.getElementById("ir-arriba").addEventListener("click", function() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  window.addEventListener("scroll", function() {
+    var boton = document.getElementById("ir-arriba");
+    if (window.scrollY > 200) {
+      boton.style.display = "block";
+    } else {
+      boton.style.display = "none";
+    }
+  });
 
 export {aplicacionEjecutable}
