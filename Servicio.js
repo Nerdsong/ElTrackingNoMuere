@@ -67,15 +67,18 @@ class Servicio{
     }
 
     getScheduleStart(){
-        return this.#scheduleStart;
+        let scheduleStartEnString = this.#scheduleStart.toLocaleString();
+        return scheduleStartEnString;
     }
 
     setScheduleStart(fechaHora){
         this.#scheduleStart = fechaHora;
+        console.log(fechaHora)
     }
     
     getRequestedBy(){
-        return this.#requestedBy;
+        let requestedBYEnString = this.#requestedBy.toLocaleString()
+        return requestedBYEnString;
     }
 
     setRequestedBy(fechaHora){
