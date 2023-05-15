@@ -6,6 +6,12 @@ html {
     font-size: 80%;
   }
 
+h3{
+  color: aliceblue;
+  text-align: center;
+  
+}
+
 body{
     margin: 0.5rem;
     background-color: rgb(56, 55, 55);
