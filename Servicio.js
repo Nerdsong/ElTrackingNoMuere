@@ -67,7 +67,20 @@ class Servicio{
     }
 
     getScheduleStart(){
-        let scheduleStartEnString = this.#scheduleStart.toLocaleString();
+
+        let options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          };
+          
+          let formatter = new Intl.DateTimeFormat('en-US', options);
+          let dateString = formatter.format(this.#scheduleStart);
+          
+        let scheduleStartEnString = dateString;
         return scheduleStartEnString;
     }
 
@@ -77,8 +90,27 @@ class Servicio{
     }
     
     getRequestedBy(){
-        let requestedBYEnString = this.#requestedBy.toLocaleString()
-        return requestedBYEnString;
+        
+        let options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          };
+          
+          let formatter = new Intl.DateTimeFormat('en-US', options);
+
+          if (isNaN(this.#requestedBy)) {
+            return "*----Vacio----*";
+          } 
+          else {
+          let dateString = formatter.format(this.#requestedBy);
+
+          let RequestedbyEnString = dateString;
+        return RequestedbyEnString;}
+
     }
 
     setRequestedBy(fechaHora){
