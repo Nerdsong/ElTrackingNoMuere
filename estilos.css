@@ -31,7 +31,7 @@ body{
 
 .container{
     margin: 0.5rem;
-    max-width: fit-content;
+    max-width: 1000rem!important;
     margin-bottom: 4rem!important;
 }
 
