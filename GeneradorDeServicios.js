@@ -6,7 +6,7 @@ class GeneradorDeServicios{
     //este metodo sólo ubica el index en el que se encuentra determinada columna y retorna la posición.
 
     ubicarColumnaDe( nombreDeColumna, matrizDeDatos){
-        let ubicacion = 0 ;
+        let ubicacion = "noExiste";
         let ultimaFila = (matrizDeDatos.length) - 1 ; // este dato es util porque al ordenar la matriz por fecha, la fila que contiene los titulos de las columnas queda de ultima. 
 
         for(ubicacion=0; ubicacion < matrizDeDatos[0].length;ubicacion ++ ){
@@ -20,7 +20,7 @@ class GeneradorDeServicios{
             }
             else {};
         };
-        return 0; 
+        return  ubicacion; 
     };
 
     //este comportamiento debería ordenar la matriz basándose en la fecha de la columna Schedule start luego de convertir las fechas en objetos "fecha"
@@ -103,16 +103,32 @@ class GeneradorDeServicios{
         let i = 0;
         for( i = 0 ; i < matrizOrdenada.length; i++ ){
             this.serviciosGenerados[i] = new Servicio ();
-            this.serviciosGenerados[i].setLegajoServicio(matrizOrdenada[i][this.ubicarColumnaDe("CE Code",matrizOrdenada)]);
-            this.serviciosGenerados[i].setSR(matrizOrdenada[i][this.ubicarColumnaDe("SR#",matrizOrdenada)]);
-            this.serviciosGenerados[i].setTask(matrizOrdenada[i][this.ubicarColumnaDe("TASK#",matrizOrdenada)]);
-            this.serviciosGenerados[i].setNombreDelSitio(matrizOrdenada[i][this.ubicarColumnaDe("Site Name",matrizOrdenada)]);
-            this.serviciosGenerados[i].setDireccion(matrizOrdenada[i][this.ubicarColumnaDe("Address",matrizOrdenada)]);
-            this.serviciosGenerados[i].setTipoDeServicio(matrizOrdenada[i][this.ubicarColumnaDe("SR Type",matrizOrdenada)]);
-            this.serviciosGenerados[i].setSeveridad(matrizOrdenada[i][this.ubicarColumnaDe("Severity",matrizOrdenada)]);
-            this.serviciosGenerados[i].setScheduleStart(matrizOrdenada[i][this.ubicarColumnaDe("Schedule Start",matrizOrdenada)]);
-            this.serviciosGenerados[i].setRequestedBy(matrizOrdenada[i][this.ubicarColumnaDe("Requested By",matrizOrdenada)]);
-            this.serviciosGenerados[i].setStatus(matrizOrdenada[i][this.ubicarColumnaDe("Status",matrizOrdenada)]);
+            this.serviciosGenerados[i].setLegajoServicio(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"CE Code"));
+            this.serviciosGenerados[i].setSR(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"SR#"));
+            this.serviciosGenerados[i].setTask(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"TASK#"));
+            this.serviciosGenerados[i].setNombreDelSitio(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Site Name"));
+            this.serviciosGenerados[i].setDireccion(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Address"));
+            this.serviciosGenerados[i].setTipoDeServicio(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"SR Type"));
+            this.serviciosGenerados[i].setSeveridad(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Severity"));
+            this.serviciosGenerados[i].setScheduleStart(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Schedule Start"));
+            this.serviciosGenerados[i].setRequestedBy(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Requested By"));
+            this.serviciosGenerados[i].setStatus(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Status"));
+            this.serviciosGenerados[i].setServiceTag(this.verificarSiColumnaExisteYDevolverInfo(matrizOrdenada,i,"Service Tag"));
+        }
+    }
+
+    //este metodo verifica que la columna exista, si no existe retorna un téxto indicando que debe añadirse 
+
+    verificarSiColumnaExisteYDevolverInfo(matriz, iterador, columnaABuscar){
+        let columnaAuxiliar =  this.ubicarColumnaDe(columnaABuscar,matriz);
+        let mensajeDecolumnaNoEncontrada = "Añadir columna al perfil de ECM";
+
+        if(columnaAuxiliar!= "noExiste" ){
+            return matriz[iterador][columnaAuxiliar];
+        }
+        else{
+            console.log(mensajeDecolumnaNoEncontrada)
+            return mensajeDecolumnaNoEncontrada;
         }
     }
 }

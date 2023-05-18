@@ -9,6 +9,7 @@ class Servicio{
     #scheduleStart = "";
     #requestedBy = ""; 
     #status = "";
+    #serviceTag = "";
     
     getLegajoServicio(){
         return this.#legajoServicio;
@@ -124,6 +125,15 @@ class Servicio{
     setStatus(status){
         this.#status = status;
     }
+
+    getServiceTag(){
+        return this.#serviceTag;
+    }
+
+    setServiceTag(serviceTag){
+        this.#serviceTag = serviceTag;
+    }
+
 };
 
 export {Servicio};

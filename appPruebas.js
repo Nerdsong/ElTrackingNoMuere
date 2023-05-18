@@ -91,12 +91,14 @@ drop_dom_element_2.addEventListener("dragleave", handleDragLeave, false);
 
 
 
+
 function aplicacionEjecutable(){
     let datosLectura = new DatosLectura();
     let generadorTecnicos = new GeneradorDeTecnicos();
     let generadorServicios = new GeneradorDeServicios();
     let generadorCartasT = new GeneradorCartasTecnicos();
-    let generadorCartasS = new GeneradorCartasServicios()
+    let generadorCartasS = new GeneradorCartasServicios();
+    let botonCartas ;
 
     datosLectura.setDatosCSV(datosCSV_2);
     datosLectura.setDatosTecnicosCSV(datosCSV_1);
@@ -127,6 +129,11 @@ function aplicacionEjecutable(){
     for(p=0; p < generadorTecnicos.tecnicosGenerados.length; p++){
         imprimirServiciostécnico(generadorTecnicos.tecnicosGenerados[p]);
     }
+
+
+
+
+
 
     resetBox();
 
